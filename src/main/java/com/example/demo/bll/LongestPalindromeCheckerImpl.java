@@ -3,12 +3,16 @@ package com.example.demo.bll;
 import org.springframework.stereotype.Component;
 
 import com.example.demo.bll.api.LongestPalindromeChecker;
+import com.example.demo.types.model.PalindromeDto;
+import com.example.demo.types.model.PalindromeRequest;
 
 @Component
 public class LongestPalindromeCheckerImpl implements LongestPalindromeChecker {
 
   // O(n^2)
-  public String longestPalindromeString(String s) {
+  @Override
+  public PalindromeDto longestPalindromeString(PalindromeRequest request) {
+    String s = request.getContent();
     if (s == null)
       return null;
     String longest = s.substring(0, 1);
@@ -24,7 +28,8 @@ public class LongestPalindromeCheckerImpl implements LongestPalindromeChecker {
         longest = palindrome;
       }
     }
-    return longest;
+    return PalindromeDto.builder().content(request.getContent()).timestamp(request.getTimestamp())
+        .longest_palindrome_size(longest.length()).build();
   }
 
   private String intermediatePalindrome(String s, int left, int right) {

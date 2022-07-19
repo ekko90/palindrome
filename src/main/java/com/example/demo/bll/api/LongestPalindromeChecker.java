@@ -1,6 +1,9 @@
 package com.example.demo.bll.api;
 
+import com.example.demo.types.model.PalindromeDto;
+import com.example.demo.types.model.PalindromeRequest;
+
 public interface LongestPalindromeChecker {
 
-  String longestPalindromeString(String input);
+  PalindromeDto longestPalindromeString(PalindromeRequest request);
 }
